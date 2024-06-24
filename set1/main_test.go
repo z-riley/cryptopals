@@ -1,6 +1,7 @@
 package set1
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -25,4 +26,12 @@ func TestFixedXOR(t *testing.T) {
 	if !reflect.DeepEqual(expected, actual) {
 		t.Errorf("Expected: %s\nGot: %s", expected, actual)
 	}
+}
+
+func TestSingleByteXORCipher(t *testing.T) {
+	result := SingleByteXORCipher("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
+
+	fmt.Println(result)
+	// Correct answer found by examining the result.
+	// Answer: string was XOR'd against 'X'
 }
