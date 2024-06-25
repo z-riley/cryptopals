@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
+	"strings"
 
 	"github.com/zac460/cryptopals/helpers"
 )
@@ -50,6 +51,32 @@ func SingleByteXORCipher(s string) []string {
 			buf[i] = b[i] ^ byte(char)
 		}
 		out = append(out, fmt.Sprintf("%c - %s\n", char, buf))
+	}
+	return out
+}
+
+type keyVal struct {
+	key rune
+	val string
+}
+
+// 4. Detect single-character XOR
+func SingleCharacterXOR(s string) []keyVal {
+	out := []keyVal{}
+	for _, line := range strings.Split(s, "\n") {
+		b, err := hex.DecodeString(line)
+		if err != nil {
+			panic(err)
+		}
+
+		for _, char := range helpers.PrintableASCII {
+			// for _, char := range []rune{'5'} {
+			buf := make([]byte, len(b))
+			for i := range b {
+				buf[i] = b[i] ^ byte(char)
+			}
+			out = append(out, keyVal{key: char, val: string(buf)})
+		}
 	}
 	return out
 }
