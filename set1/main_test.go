@@ -39,7 +39,7 @@ func TestSingleByteXORCipher(t *testing.T) {
 }
 
 func TestSingleCharacterXOR(t *testing.T) {
-	decryptedStrings := SingleCharacterXOR(ch4input)
+	decryptedStrings := SingleCharacterXOR(ch4Input)
 	var results []string
 	for _, res := range decryptedStrings {
 		if helpers.IsASCII(res.val) && helpers.IsPrintableASCII(res.val) {
@@ -64,5 +64,8 @@ I go crazy when I hear a cymbal`, "ICE")
 	if expected != actual {
 		t.Errorf("Expected: %s\nGot: %s\n", expected, actual)
 	}
+}
 
+func TestBreakRepeatingKeyXOR(t *testing.T) {
+	BreakRepeatingKeyXOR(ch6Input)
 }
