@@ -1,6 +1,7 @@
 package set1
 
 import (
+	"crypto/aes"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -213,4 +214,32 @@ func BreakRepeatingKeyXOR(b64 string) {
 
 }
 
-func UNUSED(...any) {}
+// 7. AES in ECB mode
+func DecryptAESECB(b64 string, key string) string {
+	decoded, err := base64.StdEncoding.DecodeString(b64)
+	if err != nil {
+		panic(err)
+	}
+	cb, err := aes.NewCipher([]byte(key))
+	if err != nil {
+		panic(err)
+	}
+	buf := make([]byte, len(decoded))
+	for i := 0; i < len(decoded)/aes.BlockSize; i++ {
+		lb := i * aes.BlockSize
+		ub := (i + 1) * aes.BlockSize
+		cb.Decrypt(buf[lb:ub], decoded[lb:ub])
+	}
+	return string(buf)
+}
+
+/*
+	for i := 0; i < len(bytes); i += keysize {
+		if i+keysize > len(bytes)-1 {
+			// Partial block remaining
+			blocks = append(blocks, bytes[i:])
+		} else {
+			blocks = append(blocks, bytes[i:i+keysize])
+		}
+	}
+*/

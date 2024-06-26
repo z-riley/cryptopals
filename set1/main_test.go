@@ -3,6 +3,7 @@ package set1
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/zac460/cryptopals/helpers"
@@ -68,4 +69,13 @@ I go crazy when I hear a cymbal`, "ICE")
 
 func TestBreakRepeatingKeyXOR(t *testing.T) {
 	BreakRepeatingKeyXOR(ch6Input)
+}
+
+func TestDecryptAESECB(t *testing.T) {
+	expectedPhrase := "Play that funky music"
+	actual := DecryptAESECB(ch7input, "YELLOW SUBMARINE")
+	if !strings.Contains(actual, expectedPhrase) {
+		t.Errorf("Result did not to contain \"%s\":\n%s", expectedPhrase, actual)
+	}
+
 }
