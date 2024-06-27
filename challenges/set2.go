@@ -13,3 +13,5 @@ func PadPKCS7(s string, blockSize int) string {
 	padded := s + strings.Repeat(string(rune(numPadding)), numPadding)
 	return padded
 }
+
+// 10. Implement CBC mode

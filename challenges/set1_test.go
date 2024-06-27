@@ -1,6 +1,7 @@
 package challenges
 
 import (
+	"encoding/base64"
 	"fmt"
 	"reflect"
 	"strings"
@@ -73,7 +74,11 @@ func TestBreakRepeatingKeyXOR(t *testing.T) {
 
 func TestDecryptAESECB(t *testing.T) {
 	expectedPhrase := "Play that funky music"
-	actual := DecryptAESECB(ch7input, "YELLOW SUBMARINE")
+	decoded, err := base64.StdEncoding.DecodeString(ch7input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	actual := DecryptAESECB(string(decoded), "YELLOW SUBMARINE")
 	if !strings.Contains(actual, expectedPhrase) {
 		t.Errorf("Result did not to contain \"%s\":\n%s", expectedPhrase, actual)
 	}
