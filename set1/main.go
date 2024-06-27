@@ -233,13 +233,21 @@ func DecryptAESECB(b64 string, key string) string {
 	return string(buf)
 }
 
-/*
-	for i := 0; i < len(bytes); i += keysize {
-		if i+keysize > len(bytes)-1 {
-			// Partial block remaining
-			blocks = append(blocks, bytes[i:])
-		} else {
-			blocks = append(blocks, bytes[i:i+keysize])
+// 8. Detect AES in ECB mode
+func DetectAESECB(s string) map[string]int {
+	blockSize := 16
+	occurances := make(map[string]int)
+	for i := 0; i < len(s)/blockSize; i++ {
+		lb := i * blockSize
+		ub := (i + 1) * blockSize
+		block := s[lb:ub]
+		count := strings.Count(s, block)
+		if count > 1 {
+			occurances[block] = count
 		}
 	}
-*/
+	if len(occurances) > 1 {
+		fmt.Println("DetectAESECB found multiple recurring strings:", occurances)
+	}
+	return occurances
+}

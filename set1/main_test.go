@@ -79,3 +79,15 @@ func TestDecryptAESECB(t *testing.T) {
 	}
 
 }
+
+func TestDetectAESECB(t *testing.T) {
+	// Feed it one line at a time
+	lines := strings.Split(ch8input, "\n")
+	for lineNum, s := range lines {
+		res := DetectAESECB(s)
+		if len(res) > 0 {
+			fmt.Printf("Line %d encrypted with AES ECB:\n%s\n", lineNum, s)
+			return
+		}
+	}
+}
