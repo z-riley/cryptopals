@@ -20,7 +20,7 @@ func HexToBase64(s string) []byte {
 }
 
 // 2. Fixed XOR
-func FixedXOR(s string, xor string) []byte {
+func FixedXORHex(s string, xor string) []byte {
 	b, err := hex.DecodeString(s)
 	if err != nil {
 		panic(err)
