@@ -1,4 +1,4 @@
-package set1
+package challenges
 
 import (
 	"fmt"
@@ -81,11 +81,15 @@ func TestDecryptAESECB(t *testing.T) {
 }
 
 func TestDetectAESECB(t *testing.T) {
+	expected := map[string]int{"08649af70dc06f4f": 4, "d5d2d69c744cd283": 4}
 	// Feed it one line at a time
 	lines := strings.Split(ch8input, "\n")
 	for lineNum, s := range lines {
-		res := DetectAESECB(s)
-		if len(res) > 0 {
+		actual := DetectAESECB(s)
+		if len(actual) > 0 {
+			if !reflect.DeepEqual(expected, actual) {
+				t.Errorf("\nExpected: %v\nGot: %v\n", expected, actual)
+			}
 			fmt.Printf("Line %d encrypted with AES ECB:\n%s\n", lineNum, s)
 			return
 		}

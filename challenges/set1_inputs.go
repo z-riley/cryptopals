@@ -1,4 +1,4 @@
-package set1
+package challenges
 
 // This file is for storing unwieldy challenge inputs so they're not in the way
 
