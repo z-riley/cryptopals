@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"crypto/aes"
+	"crypto/rand"
 )
 
 // XOR performs an XOR operation on two strings
@@ -46,4 +47,13 @@ func DecryptAESECB(s string, key string) string {
 		cb.Decrypt(buf[lb:ub], b[lb:ub])
 	}
 	return string(buf)
+}
+
+func RandomAESKey() []byte {
+	key := make([]byte, 16)
+	_, err := rand.Read(key)
+	if err != nil {
+		panic(err)
+	}
+	return key
 }

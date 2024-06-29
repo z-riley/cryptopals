@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -21,4 +22,8 @@ func TestEncryptAESECB(t *testing.T) {
 	if encrypted != decrypted {
 		t.Errorf("Encypted: %v\nDecrypted: %v\n", encrypted, decrypted)
 	}
+}
+
+func TestRandomAESKey(t *testing.T) {
+	fmt.Println(RandomAESKey())
 }
