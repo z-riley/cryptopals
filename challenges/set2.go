@@ -121,6 +121,15 @@ func EncryptRandomECBOrCBC(plaintext, key []byte) []byte {
 }
 
 // 11. ECB/CBC detection oracle
-func EncryptionOracle(key []byte) {
+func EncryptionOracle(cipherText []byte) {
+	// Assuming known block size (FIXME:)
+	blockSize := aes.BlockSize
+
+	for i := 0; i < len(cipherText)/blockSize; i++ {
+		lb := i * blockSize
+		ub := (i + 1) * blockSize
+		block := cipherText[lb:ub]
+		fmt.Println("Block", i, ":", DetectAESECB(string(block)))
+	}
 
 }

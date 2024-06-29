@@ -46,5 +46,5 @@ func TestEncryptionOracle(t *testing.T) {
 	fmt.Println(randomEncrypted)
 
 	// Detect AES mode for each block
-	EncryptionOracle(nil)
+	EncryptionOracle(randomEncrypted)
 }
